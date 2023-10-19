@@ -102,5 +102,13 @@ Bob attended the Math exam 1 time, the Programming exam 1 time, and did not atte
 Alex did not attend any exams.
 John attended the Math exam 1 time, the Physics exam 1 time, and the Programming exam 1 time.
 
+#solution
 
-
+SELECT st.student_id, st.student_name, su.subject_name,
+COUNT(ex.subject_name) as attended_exams
+FROM Students as st
+    CROSS JOIN Subjects as su
+    LEFT JOIN Examinations as ex
+ON st.student_id=ex.student_id AND su.subject_name=ex.subject_name
+GROUP BY st.student_id , st.student_name, su.subject_name
+ORDER BY st.student_id, su.subject_name
